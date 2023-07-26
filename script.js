@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     $.ajax({
     type:'GET',
+    async: false,
     url:'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20',
     success:function(data){
 
@@ -15,6 +16,7 @@ $( document ).ready(function() {
 function buscarPokemon(id){
   $.ajax({
   type:'GET',
+  async: false,
   url:'https://pokeapi.co/api/v2/pokemon/'+id,
   success:function(data){
     var tipo="";
@@ -46,6 +48,7 @@ function mostrarPokemon(nombre){
   limpiar();
   $.ajax({
   type:'GET',
+  async: false,
   url:'https://pokeapi.co/api/v2/pokemon/'+nombre,
   success:function(data){
     var tipo="";
@@ -56,8 +59,10 @@ function mostrarPokemon(nombre){
     for (y = 0; y < data.abilities.length; y++) {
       habilidades+="<span class='label abilities'>"+data.abilities[y].ability.name+"</span>";
     }
-    $( "#nombrePokemon" ).text(data.name+" | Exp:"+data.base_experience);
+    $( "#nombrePokemon" ).text(data.name+" | N.º "+data.id);
     $( "#tipoPokemon" ).append(tipo);
+    $( "#alturaPokemon" ).append((data.height/10).toFixed(1)+" m");
+    $( "#pesoPokemon" ).append((data.weight/10).toFixed(1) +" kg");
     $( "#habilidadesPokemon" ).append(habilidades);
     $('#detallePokemon').modal('show');
   }
@@ -67,6 +72,8 @@ function limpiar(){
   
     $( "#nombrePokemon" ).text("");
     $( "#tipoPokemon" ).text("");
+    $( "#alturaPokemon" ).text("");
+    $( "#pesoPokemon" ).text("");
     $( "#habilidadesPokemon" ).text("");
     $('#detallePokemon').modal('hide');
 }
