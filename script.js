@@ -31,7 +31,7 @@ function buscarPokemon(id){
 }
 function iniciaSwiper(){
   var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 5,
+      slidesPerView: 3,
       spaceBetween: 30,
       pagination: {
           el: ".swiper-pagination",
